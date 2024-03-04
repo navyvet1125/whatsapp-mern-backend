@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import Messages from './dbMessages.js';
 import bodyParser from 'body-parser';
 import db from './config/db.js';
+import indexRouter from './routes/index.js';
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -18,7 +19,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => res.status(200).send('Hello, world!'));
+app.use('/', indexRouter);
+// app.get('/', (req, res) => res.status(200).send('Hello, world!'));
 
 app.get('/messages/sync', (req, res) => {
     Messages.find({})
