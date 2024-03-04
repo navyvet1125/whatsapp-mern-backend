@@ -20,7 +20,7 @@ db.once('open', () => {
                 message: messageDetails.message
             });
         } else {
-            console.log('Error triggering Pusher');
+            console.log(change.operationType);
         }
     })
 });
