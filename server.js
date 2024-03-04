@@ -8,7 +8,6 @@ import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 9000;
-
 app.use(cors());
 
 // Allows Express to parse fields from the body of a request
