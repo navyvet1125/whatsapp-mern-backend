@@ -4,16 +4,12 @@ import bodyParser from 'body-parser';
 import db from './config/db.js';
 import indexRouter from './routes/index.js';
 import messagesRouter from './routes/messages.js';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 9000;
 
-// CORS Headers
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin","*");
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    next();
-});
+app.use(cors());
 
 // Allows Express to parse fields from the body of a request
 app.use(bodyParser.json());
