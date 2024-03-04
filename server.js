@@ -16,12 +16,9 @@ const pusher = new Pusher({
   useTLS: true
 });
 
-// pusher.trigger("my-channel", "my-event", {
-//   message: "hello world"
-// });
 
+// connect to mongoDB Atlas, and create a "listener" that detects when insertions to the database
 const connection_url = process.env.MONGODB_WHATSAPP_URI;
-
 mongoose.connect(connection_url);
 const db = mongoose.connection;
 db.once('open', () => {
@@ -33,7 +30,7 @@ db.once('open', () => {
         if(change.operationType === 'insert') {
             const messageDetails = change.fullDocument;
             pusher.trigger('messages', 'inserted', {
-                name: messageDetails.user,
+                name: messageDetails.name,
                 message: messageDetails.message
             });
         } else {
@@ -42,6 +39,14 @@ db.once('open', () => {
     })
 })
 
+// CORS Headers
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    next();
+});
+
+// Allows Express to parse fields from the body of a request
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
