@@ -19,4 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/messages', messagesRouter);
 
-app.listen(port, () => console.log(`Listening on localhost:${port}.`));
+// app.listen(port, () => console.log(`Listening on localhost:${port}.`));
+
+export default app;
