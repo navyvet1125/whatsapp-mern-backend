@@ -2,20 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import Messages from './dbMessages.js';
 import bodyParser from 'body-parser';
-import Pusher from 'pusher';
+import pusher from './config/pusher.js';
 
 const app = express();
 const port = process.env.PORT || 9000;
-
-// Creates new Pusher object that tells Pusher API what account and app to use
-const pusher = new Pusher({
-  appId: process.env.PUSHER_WHATSAPP_MERN_APPID,
-  key: process.env.PUSHER_WHATSAPP_MERN_KEY,
-  secret: process.env.PUSHER_WHATSAPP_MERN_SECRET,
-  cluster: process.env.PUSHER_WHATSAPP_MERN_CLUSTER,
-  useTLS: true
-});
-
 
 // connect to mongoDB Atlas, and create a "listener" that detects when insertions to the database
 const connection_url = process.env.MONGODB_WHATSAPP_URI;
