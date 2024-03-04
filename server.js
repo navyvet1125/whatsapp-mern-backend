@@ -1,9 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import Messages from './dbMessages.js';
 import bodyParser from 'body-parser';
 import db from './config/db.js';
 import indexRouter from './routes/index.js';
+import messagesRouter from './routes/messages.js';
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -19,22 +19,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Use routes from routes folder
 app.use('/', indexRouter);
-// app.get('/', (req, res) => res.status(200).send('Hello, world!'));
-
-app.get('/messages/sync', (req, res) => {
-    Messages.find({})
-        .then(messages => res.status(200).send(messages))
-        .catch(err => res.status(500).send(err));
-})
-
-app.post('/messages/new', (req, res) => {
-    const dbMessage = req.body;
-
-    Messages.create(dbMessage)
-        .then( message => res.status(201).send(`new message created: \n ${message}`))
-        .catch( err => res.status(500).send(err));
-
-})
+app.use('/messages', messagesRouter);
 
 app.listen(port, () => console.log(`Listening on localhost:${port}.`));
