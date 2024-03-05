@@ -18,7 +18,8 @@ db.once('open', () => {
             pusher.trigger('messages', 'inserted', {
                 name: messageDetails.name,
                 message: messageDetails.message,
-                timeStamp: messageDetails.timeStamp
+                timeStamp: messageDetails.timeStamp,
+                recieved: messageDetails.recieved
             });
         } else {
             console.log(change.operationType);
