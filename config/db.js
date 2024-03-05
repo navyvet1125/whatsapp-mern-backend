@@ -17,7 +17,8 @@ db.once('open', () => {
             const messageDetails = change.fullDocument;
             pusher.trigger('messages', 'inserted', {
                 name: messageDetails.name,
-                message: messageDetails.message
+                message: messageDetails.message,
+                timeStamp: messageDetails.timeStamp
             });
         } else {
             console.log(change.operationType);
