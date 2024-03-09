@@ -3,7 +3,6 @@ mongoose.Promise = import('bluebird');
 
 const Schema = mongoose.Schema;
 import mongooseBcrypt from 'mongoose-bcrypt';
-// import 
 
 // RFC 5322 compliant email regex 
 const emailValidate = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
@@ -43,19 +42,6 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
     callback(null, isMatch);
   });
 }
-
-// userSchema.statics.addRequest = async function (to_id, from_id) {
-//   try {
-//     console.log(to_id, from_id);
-//     if (this.includes(from_id)) throw new Error('duplicate request');
-//     const user = await userSchema.findByIdAndUpdate(to_id, {$push: {requests: from_id}});
-//     console.log('updated: ', user)
-//     return user;
-//   } catch (err) {
-//     return err;
-//   }
-
-//  }
 
 userSchema.methods.addRequest = async function (from_user){
   try {
