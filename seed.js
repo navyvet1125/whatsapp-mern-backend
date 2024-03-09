@@ -17,11 +17,13 @@ try {
     ]);
 
     // console.log(users[0].id);
-    const requests = await  Request.create([
-        {members: [users[0], users[1]]},
-        {members: [users[0], users[2]], request: 'accepted'},
-        {members: [users[2], users[1]]}
-    ])
+    // await User.addRequest(users[0].id, users[1].id);
+    await users[0].addRequest(users[1]);
+    // const requests = await  Request.create([
+    //     {members: [users[0], users[1]]},
+    //     {members: [users[0], users[2]], request: 'accepted'},
+    //     {members: [users[2], users[1]]}
+    // ])
     // console.log(requests);
     console.log('Database seeded...');
 } catch (err) {

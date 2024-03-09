@@ -44,6 +44,29 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
   });
 }
 
+// userSchema.statics.addRequest = async function (to_id, from_id) {
+//   try {
+//     console.log(to_id, from_id);
+//     if (this.includes(from_id)) throw new Error('duplicate request');
+//     const user = await userSchema.findByIdAndUpdate(to_id, {$push: {requests: from_id}});
+//     console.log('updated: ', user)
+//     return user;
+//   } catch (err) {
+//     return err;
+//   }
+
+//  }
+
+userSchema.methods.addRequest = async function (from_user){
+  try {
+    this.requests.push(from_user);
+    await this.save();
+    return this;
+  } catch (err) {
+    return err;
+  }
+}
+
 // Create the model class
 const ModelClass = mongoose.model('user', userSchema);
 
