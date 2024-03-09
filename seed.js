@@ -18,9 +18,9 @@ try {
 
     console.log(users[0].id);
     const requests = await  Request.create([
-        {members: {from: users[0].id, to: users[1].id}},
-        {members: {from: users[0].id, to: users[2].id}, request: 'accepted'},
-        {members: {from: users[2].id, to: users[1].id}}
+        {members: [users[0], users[1]]},
+        {members: [users[0], users[2]], request: 'accepted'},
+        {members: [users[2], users[1]]}
     ])
     console.log(requests);
     console.log('Database seeded...');

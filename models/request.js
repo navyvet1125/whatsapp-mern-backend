@@ -5,8 +5,8 @@ import User from "./user.js";
 
 const requestSchema = new mongoose.Schema({
     members: {
-        from: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-        to: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
+        type:[ {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
+        validate: [sizeLimit, '{PATH} requires 2 memebers']
     },
       request: {type: 'String', enum: [
 	    'pending',
@@ -20,15 +20,24 @@ const requestSchema = new mongoose.Schema({
     updated: Date
 });
 
-requestSchema.statics.findFriendsByID = function(id, cb ) {
-    User.find({
+requestSchema.statics.findFriendsByID = async function(id, cb ) {
+    const requests =  await this.find({
         $and: [
             {request: 'accepted'},
-            {$or: [{to:id}, {from:id}]}
+            {$or: [{members: {to:id}}, {members: {from:id}}]}
         ]
-    }, cb)
+    }).select('members');
+
+
 
 }
 
+requestSchema.pre('validate', function (){
+    this.members.sort();
+})
+
+function sizeLimit(val) {
+    return val.length === 2;
+  }
 const Request = mongoose.model('Request', requestSchema);
 export default Request;
