@@ -3,7 +3,7 @@ import User from "./user.js";
 
 
 
-const requestSchema = new mongoose.Schema;({
+const requestSchema = new mongoose.Schema({
     members: {
         from: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
         to: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
