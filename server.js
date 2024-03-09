@@ -21,5 +21,9 @@ app.use('/messages', messagesRouter);
 app.use('/users', usersRouter);
 
 // app.listen(port, () => console.log(`Listening on localhost:${port}.`));
-
+process.on('SIGINT', () => {
+    db.connection.close();
+    console.log('Database disconnected!')
+    process.exit(0);
+});
 export default app;
