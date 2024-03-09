@@ -4,7 +4,7 @@ const controller = {};
 controller.read = async (req, res) => {
     try{
         const username = req.params.username
-        const user =  await User.findOne({username}).select('email name username id joined');
+        const user =  await User.findOne({username}).select('name username friends avatar status joined');
         res.status(200).send({user});
 
     } catch (err) {
