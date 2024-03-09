@@ -5,7 +5,7 @@ import userController from '../controllers/user_controller.js';
 router.route('/:username')
     .get(userController.read);
 
-router.route('/friends')
-    .get(userController.friends);
+// router.route('/friends')
+//     .get(userController.friends);
 
 export default router;

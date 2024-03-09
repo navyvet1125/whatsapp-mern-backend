@@ -16,13 +16,13 @@ try {
         { name:'Dwight Washington', email:'daw54@aol.com', username:'daw54', password:'whodadaddy313!'}
     ]);
 
-    console.log(users[0].id);
+    // console.log(users[0].id);
     const requests = await  Request.create([
         {members: [users[0], users[1]]},
         {members: [users[0], users[2]], request: 'accepted'},
         {members: [users[2], users[1]]}
     ])
-    console.log(requests);
+    // console.log(requests);
     console.log('Database seeded...');
 } catch (err) {
     console.log(err);
