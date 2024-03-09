@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import db from './config/db.js';
 import indexRouter from './routes/index.js';
 import messagesRouter from './routes/messages.js';
+import usersRouter from './routes/users.js';
 import cors from 'cors';
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Use routes from routes folder
 app.use('/', indexRouter);
 app.use('/messages', messagesRouter);
+app.use('/users', usersRouter);
 
 // app.listen(port, () => console.log(`Listening on localhost:${port}.`));
 

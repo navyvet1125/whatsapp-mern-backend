@@ -20,16 +20,14 @@ const requestSchema = new mongoose.Schema({
     updated: Date
 });
 
-requestSchema.statics.findFriendsByID = async function(id, cb ) {
-    const requests =  await this.find({
-        $and: [
-            {request: 'accepted'},
-            {members:{"$in": [id]} }
-        ]
-    }, cb);
-
-
-
+requestSchema.statics.findFriendsByID = async function(id, cb ) { 
+    
+    const requests = await this.find({
+        $and:
+        [{request:'accepted'},
+        {members: id}]},{'_id': 0, 'members':1});
+    console.log(requests)
+    return requests;
 }
 
 async function sizeLimit (val) {
