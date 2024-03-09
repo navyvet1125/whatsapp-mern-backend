@@ -19,6 +19,11 @@ const userSchema = new Schema({
  },
   name: {type: String, required: true},
   username: {type: String, required: true, default: `newUser${Date.now()}`},
+  avatar: String,
+  status: String,
+  friends:[ {type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  requests:[ {type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  blocked:[ {type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   password: {type: String, required: true, bcrypt: true},
   joined: {type: Date, default: Date.now()},
   lastUpdated: Date
@@ -26,8 +31,6 @@ const userSchema = new Schema({
 userSchema.plugin(mongooseBcrypt, { rounds: 10 });
 
 // userSchema.post('save',  (doc) => console.log('this fired after a document was saved: ', doc));
-
-// userSchema.pre('save', function(next) {console.log('pre save activated: ', this)});
 
 userSchema.statics.findByEmail = function (email, cb) { this.findOne({email: email}, cb)};
 
