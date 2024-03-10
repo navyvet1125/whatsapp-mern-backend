@@ -54,7 +54,7 @@ userSchema.methods.addRequest = async function (from_user){
 }
 
 // Create the model class
-const ModelClass = mongoose.model('user', userSchema);
+const User = mongoose.model('user', userSchema);
 
 // Export the model
-export default ModelClass;
+export default User;
