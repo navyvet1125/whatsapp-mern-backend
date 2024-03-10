@@ -6,6 +6,7 @@ const chatSchema = mongoose.Schema({
     nickname: String,
     members: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
     isTyping: [{type: Boolean, default: false}],
+    active: Boolean,
     lastUpdated: Date,
     createdAt: {type: Date, default: Date.now()}
 })
