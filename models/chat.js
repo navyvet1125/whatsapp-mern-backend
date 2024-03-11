@@ -17,7 +17,7 @@ chatSchema.methods.changeTypingStatus = async function (member_id) {
    this.isTyping[index] = !isTyping;
    this.save();  
 }
-  // Create the model class
+ // Create the model class
 const Chat = mongoose.model('chat', chatSchema);
 
 // Export the model
